@@ -200,7 +200,7 @@ fib(n):
 
 ## Az állapottér definiálása – a DP lelke
 
-A DP **legkritikusabb lépése** az **állapot (state) pontos meghatározása**: mit jelent dp[i]? Mit jelent dp[i][j]? Ezt kell elsőként tisztázni. Ezután az **átmeneti egyenlet (recurrence relation)** és az **alapeset** leírása következik.
+A DP **legkritikusabb lépése** az **állapot (state) pontos meghatározása**: mit jelent `dp[i]`? Mit jelent `dp[i][j]`? Ezt kell elsőként tisztázni. Ezután az **átmeneti egyenlet (recurrence relation)** és az **alapeset** leírása következik.
 
 ## Lépések (általánosan)
 
