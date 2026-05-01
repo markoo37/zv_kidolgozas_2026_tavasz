@@ -1,0 +1,241 @@
+{
+  "main": {
+    "id": "1d5574202e4910a0",
+    "type": "split",
+    "children": [
+      {
+        "id": "2401f89d875a92d0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "428a7eaa5a323754",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "Gráf nézet"
+            }
+          },
+          {
+            "id": "77fb6c085ebd3495",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "pti_bsc_26_junius.pdf"
+              },
+              "pinned": true,
+              "icon": "lucide-file-text",
+              "title": "pti_bsc_26_junius"
+            }
+          },
+          {
+            "id": "30864e01bad18859",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "alga/alga1_kidolgozott.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "alga1_kidolgozott"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9765b086ddb11bcc",
+    "type": "split",
+    "children": [
+      {
+        "id": "10cf8fc59f026b6e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d4367a6ece794aca",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Fájlkezelő"
+            }
+          },
+          {
+            "id": "b2b632deed692e46",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Keresés"
+            }
+          },
+          {
+            "id": "28573de4b7910de0",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Könyvjelzők"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "ebe7dce5fbc784de",
+    "type": "split",
+    "children": [
+      {
+        "id": "6200edd0a5ac5c02",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b0cceb75ca533b7c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Visszahivatkozások"
+            }
+          },
+          {
+            "id": "a24eb3a6dde45c9d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Kimenő kapcsolatok"
+            }
+          },
+          {
+            "id": "70d94d68c105bcd7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Címkék"
+            }
+          },
+          {
+            "id": "bf3b186303d47945",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Minden tulajdonság"
+            }
+          },
+          {
+            "id": "9d11525c5d1f132b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Vázlat"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Gyors váltó megnyitása": false,
+      "graph:Gráf nézet megnyitása": false,
+      "canvas:Új vászon létrehozása": false,
+      "daily-notes:Mai jegyzet megnyitása": false,
+      "templates:Sablon beszúrása": false,
+      "command-palette:Parancspaletta megnyitása": false,
+      "bases:Új bázis létrehozása": false
+    }
+  },
+  "active": "30864e01bad18859",
+  "lastOpenFiles": [
+    "pti_bsc_26_junius.pdf",
+    "alga/alga1_kidolgozott.md",
+    "alga/alga1.md",
+    "adatbazisok/adatb1.md",
+    "progalap/progalap_C_zarovizsga_szobeli.md",
+    "operaciokutatas/ok2.md",
+    "alga/alga2.md",
+    "alga/alga2_kidolgozott.md",
+    "kozelitoszimbolikus/kozelitoszimbolikus1.md",
+    "szamhalo/szamhalo1.md",
+    "operaciokutatas/ok1.md",
+    "digkepfeld/digkepfeld.md",
+    "mestint/mestint2.md",
+    "mestint/mestint1.md",
+    "szamtud/szamtud1.md",
+    "absztrakt adattípus.md",
+    "Névtelen.canvas",
+    "progalap/progalap1.md",
+    "szamitogepesarch/szar2.md",
+    "szamitogepesarch/szar1.md",
+    "szamtud/szamtud2.md",
+    "MST.md",
+    "digitális kép.md",
+    "intenzitás.md",
+    "2026-04-28.md",
+    "adatbazisok/adatb2.md"
+  ]
+}
