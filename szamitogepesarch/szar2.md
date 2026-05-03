@@ -1,320 +1,323 @@
 # Számítógép architektúra – 28. tétel
-## Perifériák: háttértárak, RAID, nyomtatók, hálózati eszközök
-
----
 
 ## 1. Háttértárak
 
 ### 1.1 Feladat
+
 **Rövid definíció:**  
-A **[[háttértár]]** feladata az adatok tartós, nem felejtő tárolása.
+A **[[háttértár]]** (másodlagos tároló) feladata, hogy a programok, fájlok és rendszeradatok **tartósan**, **kikapcsolás után is** megmaradjanak — ellentétben a **[[RAM]]**-mal, ami **illékony** munkamemória.
 
 **Működési elv:**  
-- Kikapcsolás után is megőrzi az adatokat.  
-- Programok, dokumentumok, mentések itt tárolódnak hosszú távon.  
-- A fő különbségek: sebesség, kapacitás, ár, megbízhatóság.
+- **Nem felejtő** tárolás: az információ **mágneses**, **optikai**, **flash** vagy **mágneses szalagos** rétegen „megmarad” áram nélkül is.  
+- A **[[CPU]]** a futáshoz a **[[RAM]]**-ba tölti az adatot; a **[[háttértár]]** a **nagy kapacitású**, **lassabb** „raktár”.  
+- A választást **sebesség**, **kapacitás**, **ár/GB**, **élettartam** és **feladat** (rendszerlemez vs archívum) határozza meg.
 
 **Egyszerű példa:**  
-Az operációs rendszer és a felhasználói fájlok HDD-n vagy SSD-n helyezkednek el.
+A **[[SSD]]** / **[[HDD]]** meghajtón marad a **fotó** és a **dolgozat**, ha lehúzod a gépet a konnektorból; a **[[RAM]]**ban lévő **megnyitott**, nem mentett szöveg **elvész**.
 
 **Vizsgán fontos kulcsszavak:**  
-**[[háttértár]]**, **tartós tárolás**, **nem felejtő memória**, **kapacitás**
-
----
+**[[háttértár]]**, **tartós tárolás**, **nem felejtő**, **[[RAM]] vs háttértár**, **kapacitás**
 
 ## 2. Háttértár típusok
 
-### 2.1 Mágneses háttértárak (HDD)
-**Rövid definíció:**  
-A **[[HDD]]** forgó mágneslemezes háttértár.
-
-**Működési elv:**  
-- Mechanikus fej olvas/ír a forgó lemezen.  
-- Nagy kapacitás kedvező áron.  
-- Hátránya a magasabb késleltetés és kisebb mechanikai ellenállás.
-
-**Egyszerű példa:**  
-Nagy mennyiségű médiafájl tárolására gyakran HDD-t választanak költséghatékonyság miatt.
-
-**Vizsgán fontos kulcsszavak:**  
-**[[HDD]]**, **mágneses tárolás**, **forgó lemez**, **kapacitás/ár arány**
-
----
-
-### 2.2 Flash memória (SSD)
-**Rövid definíció:**  
-Az **[[SSD]]** félvezető alapú háttértár, mozgó alkatrész nélkül.
-
-**Működési elv:**  
-- Flash cellákban tárol adatot.  
-- Gyorsabb random hozzáférés és kisebb késleltetés, mint HDD-nél.  
-- Ár/GB általában magasabb.
-
-**Egyszerű példa:**  
-Rendszermeghajtónak SSD-t használva gyorsabban indul az operációs rendszer.
-
-**Vizsgán fontos kulcsszavak:**  
-**[[SSD]]**, **flash memória**, **alacsony késleltetés**, **gyors elérés**
-
----
-
-### 2.3 Optikai háttértárak
-**Rövid definíció:**  
-Az optikai háttértárak lézeres elven működő adathordozók (CD, DVD, Blu-ray).
-
-**Működési elv:**  
-- A lemezen lévő mintázatot lézer olvassa ki.  
-- Jó lehet hosszabb távú, ritkán módosított adatokra.  
-- Sebességük és kapacitásuk ma sokszor korlátozó tényező.
-
-**Egyszerű példa:**  
-Archivált fényképek vagy telepítőlemezek tárolása Blu-ray hordozón.
-
-**Vizsgán fontos kulcsszavak:**  
-**optikai háttértár**, **CD/DVD/Blu-ray**, **lézeres olvasás**, **archiválás**
-
----
-
-### 2.4 Szalagos háttértárak
-**Rövid definíció:**  
-A szalagos tárolás nagy kapacitású, főleg mentési és archiválási célra használt technológia.
-
-**Működési elv:**  
-- Szekvenciális elérés: az adatokhoz sorrendben jutunk hozzá.  
-- Nagyon jó költség/kapacitás arány hosszú távú tárolásra.  
-- Random elérésre nem ideális.
-
-**Egyszerű példa:**  
-Nagyvállalati napi mentések szalagos könyvtárba kerülnek.
-
-**Vizsgán fontos kulcsszavak:**  
-**szalagos háttértár**, **szekvenciális elérés**, **backup**, **archiválás**
-
----
-
-## 3. Összehasonlítás
+### 2.1 HDD
 
 **Rövid definíció:**  
-A háttértár típusok különböző kompromisszumokat adnak sebesség, ár és célfelhasználás szerint.
+A **[[HDD]]** (*Hard Disk Drive*) **forgó mágneses lemezekre** ír és onnan olvas **mozgó olvasó/író fejjel** — klasszikus „**winchester**” háttértár.
 
 **Működési elv:**  
-- **HDD**: olcsóbb nagy kapacitás, de lassabb.  
-- **SSD**: gyors és alacsony késleltetés, de drágább/GB.  
-- **Optikai**: jó archiválásra, de lassabb és kevésbé rugalmas.  
-- **Szalag**: backupra kiváló, de nem random hozzáférésű.
+- **Mechanikus** pozicionálás: a fej a megfelelő **sávra** kerül, a lemez **forog** — ez **késleltetést** ad (keresés, rotációs várakozás).  
+- **Nagy kapacitás**, jó **ár/GB**; **random** és **szekvenciális** olvasás is lehetséges, de a **random** lassabb, mint **[[SSD]]**-nél.  
+- **Rezgés**, **ütődés** érzékenyebb, mint egy **flash** lemeznél.
 
 **Egyszerű példa:**  
-Sok rendszer kombinálja: OS SSD-n, nagy adattárolás HDD-n, mentés szalagon.
+Olyan, mint egy **lejátszólemez + tű**: a **tűt** odébb kell tenni a megfelelő **sávhoz**, majd **várnod** kell, míg a **lemez** aláfordul — **sok adat olcsón**, de **nem „azonnal ott”** minden bájt.
 
 **Vizsgán fontos kulcsszavak:**  
-**sebesség-kapacitás-ár kompromisszum**, **random vs szekvenciális elérés**, **rétegezett tárolás**
+**[[HDD]]**, **mágneses lemez**, **mozgó fej**, **kapacitás/ár**, **késleltetés**
 
----
+### 2.2 SSD
 
-## 4. RAID (Redundant Array of Independent Disks)
+**Rövid definíció:**  
+Az **[[SSD]]** (*Solid State Drive*) **félvezetős flash** memóriacellákban tárol adatot **mozgó alkatrész nélkül**.
+
+**Működési elv:**  
+- **Nincs** mechanikus fej — **alacsony késleltetés**, **gyors random** hozzáférés tipikusan **[[HDD]]**-hez képest.  
+- **Írási** élettartam és **vezérlő**-algoritmusok számítanak (wear leveling — elég említés).  
+- **Ár/GB** általában **magasabb**, mint **[[HDD]]**-nél.
+
+**Egyszerű példa:**  
+Olyan, mint a **telefon belső tárhelye**: **nincs forgó rész**, „**bárhová**” gyorsan **ugrasz** olvasni — ezért **gyorsan indul** róla a **rendszer**.
+
+**Vizsgán fontos kulcsszavak:**  
+**[[SSD]]**, **flash**, **nincs mechanika**, **alacsony késleltetés**, **drágább/GB**
+
+### 2.3 Optikai
+
+**Rövid definíció:**  
+Az **[[optikai háttértár]]** **lézerrel** olvassa (és írja, ha írható) a lemez **pit**/**land** mintázatát — **CD**, **DVD**, **Blu-ray**.
+
+**Működési elv:**  
+- A fej **optikailag** követi a spirált; sebesség és kapacitás a **formátumtól** függ.  
+- **Ritkán írt**, **hosszú távú** adathordozónak vagy **telepítőnek** volt ideális; ma a **hálózatos** terjesztés miatt kevésbé központi.
+
+**Egyszerű példa:**  
+Mint egy **zenelemez**, amit **lézerrel** „**tapintasz**” végig: **jó archív példány**, de **nem** ez a leggyorsabb **mindennapi** munkameghajtó.
+
+**Vizsgán fontos kulcsszavak:**  
+**[[optikai háttértár]]**, **CD/DVD/Blu-ray**, **lézer**, **archiválás**
+
+### 2.4 Szalagos
+
+**Rövid definíció:**  
+A **[[szalagos háttértár]]** **mágneses szalagon**, **szekvenciálisan** tárol nagy adatmennyiséget — főleg **mentés** és **archiválás**.
+
+**Működési elv:**  
+- **Sorban** kell haladni az adaton (nincs valódi **random** ugrás egy fájlra, mint **[[HDD]]**-nél); egy fájlhoz gyakran **sok tekerés**.  
+- **Nagyon jó TB/$** és **hosszú megőrzés** adatközponti környezetben; **helyreállítási idő** lehet nagy.
+
+**Egyszerű példa:**  
+Mint egy **VHS szalag**: ha a **film vége** kell, **végig kell tekerni** — **olcsó nagy tár**, de **nem** „**nyisd ki a 47. fájlt azonnal**” típusú használatra.
+
+**Vizsgán fontos kulcsszavak:**  
+**[[szalagos háttértár]]**, **szekvenciális elérés**, **backup**, **nagy kapacitás**
+
+## 3. Összehasonlítás (TÁBLÁZAT kötelező!)
+
+**Rövid definíció:**  
+A háttértár-típusok **ugyanazt a feladatot** (tartós tárolás) **más-más kompromisszummal** oldják meg: **sebesség**, **ár**, **elérési mód**, **felhasználás**.
+
+**Működési elv:**  
+- **[[HDD]]** és **[[SSD]]** tipikusan **fájlrendszeres**, **random** hozzáféréses munka- és adatlemez.  
+- **Optikai** és **szalag** inkább **médium** / **mentési réteg** szerepben maradt.  
+- Gyakorlatban **kombinálják**: pl. **[[SSD]]** rendszernek, **[[HDD]]** nagy tárnak, **szalag** heti mentésnek.
+
+**Egyszerű példa:**  
+**[[SSD]]** = **kéznél lévő íróasztal**; **[[HDD]]** = **szekrény** nagy dobozokkal; **szalag** = **pince raktár** olcsón, de **keresgélni** macerás.
+
+**Vizsgán fontos kulcsszavak:**  
+**sebesség–kapacitás–ár**, **random vs szekvenciális**, **rétegezett tárolás**
+
+### Fő típusok egy táblázatban
+
+| Típus | Technológia | Mozgó alkatrész | Random hozzáférés | Ár/GB (tipikusan) | Jellemző felhasználás |
+|--------|-------------|-----------------|-------------------|-------------------|------------------------|
+| **[[HDD]]** | Mágneses forgó lemez + fej | **Igen** | Van, de **lassabb** | **Alacsony** | Nagy fájltár, archívum |
+| **[[SSD]]** | **Flash** (NAND) | **Nem** | **Gyors** | **Magasabb** | OS, alkalmazások, gyors munka |
+| **[[optikai háttértár]]** | Lézer + lemez | Igen (forgás) | Korlátozott / lassabb | Közepes / alacsony (lemez) | Telepítő, archív média |
+| **[[szalagos háttértár]]** | Mágneses szalag | Igen (tekercs) | **Gyakorlatilag nem** | **Nagyon alacsony** / TB | **Backup**, archívum |
+
+### [[HDD]] vs [[SSD]] — vizsgán ezt hasonlítsd össze
+
+| Szempont | **[[HDD]]** | **[[SSD]]** |
+|-----------|-------------|-------------|
+| **Mechanika** | Forgó lemez, mozgó fej | **Nincs** forgó rész |
+| **Késleltetés / random I/O** | Nagyobb (fejmozgatás) | **Kisebb**, „**ugrálós**” fájloknál előny |
+| **Kapacitás / ár** | **Jobb** nagy tár olcsón | Drágább ugyanannyi GB-ért |
+| **Zaj / ütés** | Zúghat, **érzékenyebb** | Csendesebb, **rázásra** ellenállóbb |
+| **Tipikus szerep** | Adattó, média | Rendszerlemez, gyors projektlemez |
+
+**Vizsgán visszamondható mondat:** „**[[HDD]]**: olcsó és nagy, de **mechanikus** és **lassabb randomnal**; **[[SSD]]**: **gyors** és **nincs fej**, de **drágább gigabájtonként**.”
+
+## 4. RAID
 
 ### 4.1 Cél
+
 **Rövid definíció:**  
-A **[[RAID]]** több lemez összekapcsolása teljesítmény- és/vagy megbízhatósági célból.
+A **[[RAID]]** (*Redundant Array of Independent Disks*) **több fizikai lemezt** egy **logikai egységként** kezel: cél a **teljesítmény** és/vagy a **hibatűrés** (redundancia) javítása.
 
 **Működési elv:**  
-- Adatelosztás (striping), tükrözés (mirroring), paritás kombinálható.  
-- Néhány szint gyorsít, mások hibatűrést adnak, vagy mindkettőt.  
-- Fontos: RAID nem egyenlő mentéssel.
+- **Striping** (szétosztás): adat **több lemezre** kerül → **gyorsabb** lehet az átvitel.  
+- **Mirroring** (tükrözés): **ugyanaz** a másolat **több lemezen** → **egy lemez** kieshet.  
+- **Paritás**: **hibajavító** extra információ → kevesebb „nyers” kapacitás, de **védelem**.  
+- **Fontos:** **[[RAID]] ≠ backup** — **törlés**, **ransomware**, **emberi hiba** ellen **nem** helyettesíti a **mentési stratégiát**.
 
 **Egyszerű példa:**  
-Szerverben RAID 1-et használva egy lemezhiba esetén is működhet a rendszer.
+A **[[RAID]]** olyan, mint **több párhuzamos sáv** az autópályán (**gyorsabb**), vagy **második példány** a fontos iratról (**biztonság**) — de ha **mindkettőt** **összegyűrűd**, a **másolat** sem segít → kell **külön mentés**.
 
 **Vizsgán fontos kulcsszavak:**  
-**[[RAID]]**, **redundancia**, **hibatűrés**, **teljesítmény**, **nem backup**
+**[[RAID]]**, **striping**, **mirroring**, **paritás**, **hibatűrés**, **nem backup**
 
----
+### 4.2 RAID 0
 
-### 4.2 Alap szintek
-
-#### RAID 0
 **Rövid definíció:**  
-A **RAID 0** adatelosztást használ redundancia nélkül.
+A **[[RAID 0]]** **striping**: az adat **darabokra** bontva **több lemezre** folyik, **redundancia nélkül**.
 
 **Működési elv:**  
-- Az adat blokkokra bontva több lemezre kerül.  
-- Nő az írás/olvasás sebessége.  
-- Egy lemezhiba az egész tömb adatvesztését okozhatja.
+- **Párhuzamos** írás/olvasás → **nőhet a sebesség**.  
+- **Egyetlen lemez** hibája gyakran a **tömb egészét** veszélyezteti (adat **részek** elvesznek).  
+- **Hasznos kapacitás** közel a lemezek **összege** (nincs **tükör**- vagy **paritás**-helyfoglalás).
 
 **Egyszerű példa:**  
-Videószerkesztés ideiglenes munkaterületre használható, ahol a sebesség a fő szempont.
+**Gyors**, de **veszélyes**, mint **két motor egy autóban**, de **egy lánc** köti őket: **egyik szétcsúszik**, **megáll minden**.
 
 **Vizsgán fontos kulcsszavak:**  
-**RAID 0**, **striping**, **gyorsaság**, **nincs hibatűrés**
+**[[RAID 0]]**, **striping**, **gyors**, **nincs hibatűrés**, **kockázat**
 
----
+**Vizsgán visszamondható mondat:** „**RAID 0** = **gyors**, de **üvegpadló**: **egy lemez**, és **nagyon fáj**.”
 
-#### RAID 1
+### 4.3 RAID 1
+
 **Rövid definíció:**  
-A **RAID 1** tükrözést alkalmaz: ugyanaz az adat több lemezen is megvan.
+A **[[RAID 1]]** **mirroring** (*tükrözés*): **ugyanaz** az adat **legalább két lemezen** **azonos** másolatban van.
 
 **Működési elv:**  
-- Minden írás minden tükörlemezre megtörténik.  
-- Jó hibatűrés egy lemez kiesése esetén.  
-- Hasznos kapacitás csökken, mert a tükör helyet foglal.
+- **Minden írás** minden **tükörre** lefut → **lassabb írás** lehet, olvasás **több forrásból** optimalizálható.  
+- **Egy lemez** kiesése után is van **másolat** → **magas rendelkezésre állás**.  
+- **Ár / kapacitás:** két azonos lemeznél a **hasznos** kapacitás kb. **a fele** (a másik a másolat).
 
 **Egyszerű példa:**  
-Kisvállalati szerveren RAID 1 gyakori az üzembiztonság növelésére.
+**Biztonságos**, de **drága** tárhelyben: mint ha **minden fájlt** **kétszer** nyomtatnál **papírra** — **egyik** **elveszik**, **még mindig megvan** a másik.
 
 **Vizsgán fontos kulcsszavak:**  
-**RAID 1**, **mirroring**, **hibatűrés**, **kapacitásvesztés**
+**[[RAID 1]]**, **mirroring**, **hibatűrés**, **kapacitásfelárat**
 
----
+**Vizsgán visszamondható mondat:** „**RAID 1** = **biztonságos**, mert **van másolat**, de **fizetsz** érte: **fele annyi** a **hasznos** hely.”
 
-#### RAID 5
+### 4.4 RAID 5
+
 **Rövid definíció:**  
-A **RAID 5** elosztott paritást használ, így teljesítmény és adatbiztonság között kompromisszumot ad.
+A **[[RAID 5]]** **elosztott paritást** használ: **adat** és **paritás** **több lemezen** váltakozik — **egy lemez** hibája **visszaépíthető**.
 
 **Működési elv:**  
-- Legalább 3 lemez szükséges.  
-- Egy lemezhiba túlélhető paritás segítségével.  
-- Írási műveletek paritásszámítás miatt lassulhatnak.
+- Legalább **3 lemez** szükséges.  
+- **Paritás** minden írásnál **frissül** → **írás** terhelhetőbb, mint **[[RAID 0]]**-nál.  
+- **Hasznos kapacitás** kb. **n−1** lemez (egy lemeznyi kapacitást a **paritás** foglal el).
 
 **Egyszerű példa:**  
-Fájlszervereknél gyakori választás, ha kell kapacitás és hibatűrés is.
+Mint a **Sudoku egy extra sora**: ha **egy szám** (**lemez**) „**kihullik**”, a **többi** alapján **visszakövetkezteted** — **nem** kell **dupla** teljes másolat, de **van** védelem.
 
 **Vizsgán fontos kulcsszavak:**  
-**RAID 5**, **paritás**, **kompromisszum**, **egy lemezhiba tolerálás**
+**[[RAID 5]]**, **elosztott paritás**, **egy lemezhiba**, **kompromisszum**
 
----
+### 4.5 RAID 10 (röviden)
 
-#### RAID 10 (említés)
 **Rövid definíció:**  
-A **RAID 10** a RAID 1 és RAID 0 kombinációja (tükrözött stripe).
+A **[[RAID 10]]** (1+0): **először tükrök** (**[[RAID 1]]** párok), ezekre **striping** (**[[RAID 0]]**) — **sebesség** és **hibatűrés** együtt, **több lemez** és **költség** árán.
 
 **Működési elv:**  
-- Jó teljesítmény és jó hibatűrés együtt.  
-- Több lemez kell, ezért drágább megoldás.
+- **Minimum 4 lemez** (tipikus elrendezés).  
+- **Egy lemez** kiesése **a saját párján** belül kezelhető; **rossz kombináció** több hibánál már **végzetes** lehet.  
+- **Adatbázisok**, **nagy IOPS** igényű szolgáltatások kedvelt megoldása.
 
 **Egyszerű példa:**  
-Nagy terhelésű adatbázis-szervernél gyakori választás.
+**Két párhuzamos sáv**, mindegyiken **biztonsági másolat** — **gyors** és **strapabíró**, de **sok lemez** kell.
 
 **Vizsgán fontos kulcsszavak:**  
-**RAID 10**, **mirror + stripe**, **nagy teljesítmény**, **nagyobb költség**
-
----
+**[[RAID 10]]**, **mirror + stripe**, **teljesítmény + redundancia**, **≥4 lemez**
 
 ## 5. Nyomtatók
 
-### 5.1 Tintasugaras (inkjet)
+### 5.1 Tintasugaras
+
 **Rövid definíció:**  
-A **[[tintasugaras nyomtató]]** folyékony tintacseppeket juttat a papírra.
+A **[[tintasugaras nyomtató]]** apró **folyékony tintacseppeket** juttat a papírra (piezo vagy hőbuborék elv — elég: **csepp** alapú).
 
 **Működési elv:**  
-- Finom cseppképzés miatt jó képminőséget adhat.  
-- Kis mennyiségű, vegyes nyomtatásra gyakori.  
-- Nagy volumenben lassabb és oldalanként drágább lehet.
+- **Felbontás** és **színátmenet** jó lehet; **fotó** és **kevés** oldal otthonra ideális.  
+- **Nagy mennyiség** / oldalankénti költség gyakran **rosszabb**, mint **[[lézernyomtató]]**-nál; **szárítás**, **fej** karbantartás lehet szempont.
 
 **Egyszerű példa:**  
-Otthoni fotónyomtatásra tintasugaras eszköz jó választás.
+Mint a **filctoll** és a **permetező** keveréke: **szép szín**, de ha **napi 500 oldal** kell, **hamar** „**elfogy**” és **lassabb** lehet.
 
 **Vizsgán fontos kulcsszavak:**  
-**[[tintasugaras nyomtató]]**, **folyékony tinta**, **jó képminőség**, **kisebb sebesség**
+**[[tintasugaras nyomtató]]**, **tinta**, **fotó**, **kis volumen**
 
----
+### 5.2 Lézer
 
-### 5.2 Lézernyomtató
 **Rövid definíció:**  
-A **[[lézernyomtató]]** tonerport és elektrofotográfiai elvet használ.
+A **[[lézernyomtató]]** **toner** (száraz por) és **elektrofotográfia**: **lézer** „**rajzol**” a **fényérzékeny** dobra, a toner **odaragad**, majd **papírra** kerül és **hővel fixálódik**.
 
 **Működési elv:**  
-- Lézerrel „rajzolja” a képet a dobra, toner tapad rá, majd papírra kerül és fixálódik.  
-- Gyors, nagy mennyiségű szöveges nyomtatásra kiváló.  
-- Irodai környezetben gyakori.
+- **Nagy sebesség**, **éles szöveg**, **nagy volumen** gazdaságosabb lehet.  
+- **Iroda** és **sok fekete-fehér** dokumentum tipikus választása.
 
 **Egyszerű példa:**  
-Egy irodában napi több száz oldal nyomtatására lézernyomtató hatékonyabb.
+Mint egy **pecsétnyomó gyár**: **egyforma** oldalak **gyorsan**, **egyenletes minőségben** — **nem** feltétlenül nyeri a **fotóversenyt**, de **számlát** **üt**, mint a **gép**.
 
 **Vizsgán fontos kulcsszavak:**  
-**[[lézernyomtató]]**, **toner**, **nagy sebesség**, **irodai felhasználás**
+**[[lézernyomtató]]**, **toner**, **lézer**, **irodai nagy volumen**
 
----
+**Vizsgán visszamondható mondat:** „**Tintasugaras** = **tinta + cseppek**, jó **fotó**; **lézer** = **toner + lézer a dobon**, jó **sok szöveg**.”
 
-## 6. Telekommunikációs berendezések
+## 6. Telekommunikáció
 
 ### 6.1 Modem
+
 **Rövid definíció:**  
-A **[[modem]]** digitális és analóg jelek közti átalakítást végez.
+A **[[modem]]** (*modulator–demodulator*) **digitális adatot** és a **vonalon** továbbítható **analóg jelalakot** váltogatja: **moduláció** (küldés) és **demoduláció** (vétele).
 
 **Működési elv:**  
-- Moduláció/demoduláció folyamatával továbbítható adat hagyományos vonalon is.  
-- Több technológiában is alap komponens lehet.
+- A **szolgáltató hálózata** és a **otthoni eszköz** között **illesztő** szerep.  
+- Ma gyakran **modem + router** egy dobozban; a lényeg: **a vonal fizikájához** kell **hangolni** a jelet.
 
 **Egyszerű példa:**  
-Régi telefonvonalas internetkapcsolat modem nélkül nem működött.
+Mint a **fordító** két nyelv között: a **számítógép** „**biteket**” beszél, a **telefonvonal** „**hangszerű**” jelet — a **[[modem]]** **lefordítja** oda-vissza.
 
 **Vizsgán fontos kulcsszavak:**  
-**[[modem]]**, **moduláció**, **demoduláció**, **digitális-analóg átalakítás**
-
----
+**[[modem]]**, **moduláció**, **demoduláció**, **illesztés**
 
 ### 6.2 ADSL
+
 **Rövid definíció:**  
-Az **[[ADSL]]** szélessávú adatátviteli technológia réz telefonvonalon.
+Az **[[ADSL]]** (*Asymmetric Digital Subscriber Line*) **digitális** adatátvitel **réz** **telefonvezetéken**, a **beszéd** és az **internet** gyakran **külön frekvenciasávban**.
 
 **Működési elv:**  
-- Aszimmetrikus: letöltés jellemzően gyorsabb, mint feltöltés.  
-- A hang és adat külön frekvenciasávban halad.
+- **Aszimmetrikus**: a **letöltés** sávszélessége tipikusan **nagyobb**, mint a **feltöltés** — otthoni **böngészés**-profilhoz illeszkedett.  
+- **Távolság** a központtól és a **vonal minősége** erősen befolyásolja a sebességet.
 
 **Egyszerű példa:**  
-Otthoni internetszolgáltatásnál régebben gyakori volt az ADSL modemes kapcsolat.
+Mint egy **kétirányú út**, ahol **lefelé** **több sáv** van, **felfelé** **kevesebb**: **film** lejön **gyorsan**, **nagy fájl** feltöltése **lassabb** lehet.
 
 **Vizsgán fontos kulcsszavak:**  
-**[[ADSL]]**, **telefonvonal**, **aszimmetrikus sávszélesség**, **szélessáv**
+**[[ADSL]]**, **réz telefonvonal**, **aszimmetrikus**, **szélessáv**
 
----
+### 6.3 KábelTV internet
 
-### 6.3 KábelTV-s internet
 **Rövid definíció:**  
-A kábeltelevíziós hálózaton nyújtott internet koaxiális infrastruktúrát használ.
+A **[[kábelTV internet]]** a **koaxiális** kábelhálózaton (eredetileg **TV**-terjesztésre épült infrastruktúra) nyújt **szélessávú** internet-hozzáférést.
 
 **Működési elv:**  
-- Nagyobb sávszélességet tud adni, mint sok régebbi telefonvonalas megoldás.  
-- Megosztott közeg, ezért terhelésfüggő teljesítmény előfordulhat.
+- **Megosztott** közeg: egy **node** környezetében sok előfizető **uganazon** a **sávon** osztozik → **csúcsidőben** lassulhat.  
+- **Letöltési** sebesség gyakran **nagyon jó** volt a régi telefonos DSL-hez képest.
 
 **Egyszerű példa:**  
-Lakótelepi szolgáltatásoknál elterjedt a koaxiális kábelre épülő internet.
+Mint egy **nagy közös vízvezeték**: **este mindenki zuhanyzik** → **nyomás** (sebesség) **csökken**; **éjjel** viszont **bőven folyik**.
 
 **Vizsgán fontos kulcsszavak:**  
-**kábelnet**, **koaxiális kábel**, **sávszélesség**, **megosztott közeg**
-
----
+**[[kábelTV internet]]**, **koaxiális kábel**, **megosztott közeg**, **szélessáv**
 
 ## 7. Összefüggések
+
 **Rövid definíció:**  
-A perifériák és háttértárak együtt biztosítják a rendszer adatkezelését és külső kapcsolatait.
+A **[[háttértár]]**, a **[[RAID]]**, a **nyomtatók** és a **távközlési** eszközök együtt adják a számítógép **I/O** és **kommunikációs** világát a **[[CPU]]** / **[[RAM]]** mellett.
 
 **Működési elv:**  
-- Háttértárak az adatok tartós megőrzését adják.  
-- RAID javíthatja a rendelkezésre állást és/vagy teljesítményt.  
-- Nyomtatók és hálózati eszközök az I/O és kommunikáció részei.
+- **Tárolás**: **[[SSD]]**/**[[HDD]]** + opcionálisan **[[RAID]]** a **szerver** / **munkaállomás** megbízhatóságáért.  
+- **Kimenet**: **[[lézernyomtató]]** / **[[tintasugaras nyomtató]]** a **papír-alapú** eredmény.  
+- **Külső világ**: **[[modem]]**, **[[ADSL]]**, **[[kábelTV internet]]** a **távoli** erőforrások felé.
 
 **Egyszerű példa:**  
-Egy céges szerver SSD + RAID tömböt használ, a felhasználók hálózaton érik el, és központi nyomtatóra küldenek dokumentumot.
+**Céges gép**: **[[SSD]]** + **[[HDD]]**, **[[RAID 1]]** a fontos lemezeknek, **[[lézernyomtató]]** a számlának, **[[kábelTV internet]]** vagy **újabb** optikai **szolgáltatás** a levélhez.
 
 **Vizsgán fontos kulcsszavak:**  
-**I/O eszköz**, **adatmegőrzés**, **rendelkezésre állás**, **kommunikáció**
-
----
+**I/O**, **tárolási réteg**, **[[RAID]]**, **hálózati illesztés**, **kimeneti eszköz**
 
 ## + Vizsgán érdemes még megemlíteni
-- **[[SSD]] vs [[HDD]]**: késleltetés, mechanika, ár/kapacitás különbség.  
-- **[[RAID]] célja**: redundancia/teljesítmény, de **nem helyettesíti a backupot**.  
-- Nyomtatóknál használati profil alapján választunk (fotó vs nagy irodai mennyiség).  
-- Hálózati hozzáférések fejlődése: telefonvonal -> kábel -> modern optikai rendszerek.
 
----
+- **[[RAID]]** javíthat **lemezhiba** ellen, **nem** véd **véletlen törlés** vagy **titkosított zsarolás** ellen → **rendszeres backup** külön.  
+- **[[SSD]]** **TRIM**, **írási** terhelés — vizsgán elég: „**SSD** más karbantartási mintázat, mint **[[HDD]]**”.  
+- **Nyomtató**: **TCO** (patron/toner + megbízhatóság), nem csak a **vásárlási ár**.  
+- **Hozzáférés fejlődése**: **telefonvonal** → **[[kábelTV internet]]** / **[[ADSL]]** → **üvegszál** (FTTH) — a tételhez a **három** megadott technológia a **klasszikus** kép.
 
 ## Rövid szóbeli összefoglaló
-A perifériák közül a háttértárak a tartós adatmegőrzésért felelnek. A HDD mágneses, olcsó és nagy kapacitású, de lassabb, míg az SSD gyorsabb és kisebb késleltetésű, viszont drágább. Optikai és szalagos tárolás főleg archiválásra jellemző. A RAID több lemezből álló rendszer, amely teljesítményt és/vagy hibatűrést adhat: RAID 0 gyors, de nem biztonságos, RAID 1 tükröz, RAID 5 paritással jó kompromisszum, RAID 10 kombinált megoldás. A nyomtatóknál a tintasugaras jó minőségű, a lézernyomtató gyors és nagy mennyiségre ideális. Hálózati oldalon modem, ADSL és kábelnet különböző adatátviteli technológiákat képviselnek. Fontos, hogy a megfelelő periféria kiválasztása mindig feladattól és költségkerettől függ.
+
+A **[[háttértár]]** **tartósan** tárol; **[[HDD]]** **mágneses és mechanikus**, **olcsó nagy tár**, **[[SSD]]** **flash**, **gyors**, **drágább/GB**. **[[optikai háttértár]]** és **[[szalagos háttértár]]** főleg **archívum/mentés**. A **[[RAID]]** több lemezt kapcsol: **[[RAID 0]]** **gyors, veszélyes**, **[[RAID 1]]** **biztonságos, drága kapacitásban**, **[[RAID 5]]** **paritás**, **[[RAID 10]]** **gyors + tükrözött**. **[[tintasugaras nyomtató]]** **tinta**, **[[lézernyomtató]]** **toner + lézer**. **[[modem]]** **jelátalakító**, **[[ADSL]]** **réz, aszimmetrikus**, **[[kábelTV internet]]** **koax, megosztott sáv**.
 
 ## Kulcsfogalmak
+
 - [[háttértár]]
+- [[RAM]]
 - [[HDD]]
 - [[SSD]]
 - [[optikai háttértár]]
@@ -328,36 +331,27 @@ A perifériák közül a háttértárak a tartós adatmegőrzésért felelnek. A
 - [[lézernyomtató]]
 - [[modem]]
 - [[ADSL]]
-- [[kábelnet]]
+- [[kábelTV internet]]
 
 ## Tipikus vizsgakérdések
-1. **Mi a háttértárak fő feladata?**  
-   Az adatok tartós, nem felejtő tárolása.
 
-2. **Mi a legfontosabb különbség HDD és SSD között?**  
-   HDD mechanikus és lassabb, SSD félvezetős és gyorsabb, de drágább/GB.
-
-3. **Mi a RAID célja?**  
-   Teljesítmény növelése és/vagy hibatűrés javítása több lemez használatával.
-
-4. **Miért nem backup a RAID?**  
-   Mert hardverhibát kezelhet, de nem véd például törlés, zsarolóvírus vagy logikai hiba ellen.
-
-5. **Miben különbözik RAID 0 és RAID 1?**  
-   RAID 0 gyors, de nincs redundancia; RAID 1 tükrözéssel hibatűrőbb.
-
-6. **Mikor célszerű tintasugaras és mikor lézernyomtató?**  
-   Tintasugaras: jobb fotó/otthoni vegyes használat; lézer: nagy mennyiségű irodai nyomtatás.
-
-7. **Mit jelent az ADSL aszimmetrikussága?**  
-   A letöltési sebesség jellemzően nagyobb, mint a feltöltési.
+1. **Mi a [[háttértár]] feladata?** — **Tartós**, **nem felejtő** tárolás; **[[RAM]]**-mal szemben **megmarad** áram nélkül is.  
+2. **[[HDD]] vs [[SSD]] három szóban?** — **Mechanikus vs flash**; **lassabb random vs gyors**; **olcsóbb/GB vs drágább**.  
+3. **Mi az [[optikai háttértár]] és a [[szalagos háttértár]] fő különbsége használatban?** — Optikai: **lézeres lemez**, archív/telepítő; szalag: **szekvenciális**, **backup**.  
+4. **Mi a [[RAID]] célja?** — **Teljesítmény** és/vagy **hibatűrés** több lemezzel.  
+5. **Miért nem backup a [[RAID]]?** — **Logikai** hibák, **törlés**, **malware** ellen **nem** véd; csak **lemez-szintű** redundancia/teljesítmény.  
+6. **[[RAID 0]] vs [[RAID 1]]?** — **0**: **striping**, **gyors**, **nincs** védelem; **1**: **tükör**, **hibatűrőbb**, **fele** hasznos kapacitás (2 lemeznél).  
+7. **[[RAID 5]] lényege?** — **Elosztott paritás**, **≥3 lemez**, **egy lemez** hiba javítható, írás **terheltebb**.  
+8. **Tintasugaras vs lézer?** — **Tinta** vs **toner+lézer**; **fotó/otthon** vs **irodai tömeg**.  
+9. **Mit csinál a [[modem]]?** — **Moduláció/demoduláció**: digitális adat **vonalra** illesztése és vissza.  
+10. **[[ADSL]] aszimmetria?** — **Letöltés** tipikusan **gyorsabb**, mint **feltöltés**.  
+11. **Miért lehet lassabb csúcsban a [[kábelTV internet]]?** — **Megosztott** koaxiális **sávszélesség** a szomszédokkal.
 
 ## Minimum, amit tudni kell
-- A háttértár fogalma és fő típusai (HDD, SSD, optikai, szalag).  
-- HDD és SSD alap különbsége sebességben, mechanikában, árban.  
-- RAID fogalma és fő célja (teljesítmény +/vagy redundancia).  
-- RAID 0, 1, 5 alapötlete.  
-- A tétel kulcsmondata: RAID nem helyettesíti a biztonsági mentést.  
-- Tintasugaras és lézernyomtató fő felhasználási különbsége.  
-- Modem alapfunkciója (digitális-analóg átalakítás).  
-- ADSL és kábelnet rövid jellemzése.
+
+- **[[háttértár]]** vs **[[RAM]]** szerepe.  
+- **[[HDD]]** / **[[SSD]]** / **[[optikai háttértár]]** / **[[szalagos háttértár]]** egy mondatos jellemzés + **táblázatos** összehasonlítás képessége.  
+- **[[RAID]]** célja; **[[RAID 0]]** = **gyors, veszélyes**; **[[RAID 1]]** = **biztonságos, drága kapacitásban**; **[[RAID 5]]** paritás; **[[RAID 10]]** röviden.  
+- **[[RAID]] nem backup.**  
+- **[[tintasugaras nyomtató]]** vs **[[lézernyomtató]]**.  
+- **[[modem]]**, **[[ADSL]]**, **[[kábelTV internet]]** alapötlete egy-egy visszamondható mondatban.
