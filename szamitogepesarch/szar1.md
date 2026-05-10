@@ -234,6 +234,20 @@ A **korszerű processzorok** tervezése a **magas teljesítmény** és az **elfo
 
 **Egyszerű példa:**  
 A **[[cache]]** olyan, mint a **íróasztal fiókja**: ami **gyakran kell**, ott van **kéznél**; ami ritkán, a **pincében** (**[[RAM]]**) — kevesebb „**le-fel szaladgálás**”, gyorsabb munka.
+  
+A korszerű processzorok tervezésének alapvető célja, hogy minél nagyobb teljesítményt érjenek el úgy, hogy közben az energiafogyasztás és a hőtermelés elfogadható maradjon. Ez egy folyamatos egyensúlyozás: ha növeljük a teljesítményt, általában nő a fogyasztás és a hő is, ezért a modern architektúrák több különböző megoldást kombinálnak.  
+  
+Az egyik legfontosabb eszköz a párhuzamosság. Ahelyett, hogy a processzor egy időben csak egyetlen utasítást hajtana végre, több utasítás feldolgozása történik átfedéssel. A pipelining során az utasítás végrehajtása több lépésre van bontva, és ezek a lépések különböző utasításokon párhuzamosan futnak. Ennek eredményeként ideális esetben minden órajelciklus végén elkészül egy utasítás, még akkor is, ha egyetlen utasítás teljes végrehajtási ideje nem csökken.  
+  
+A párhuzamosság egy másik formája, hogy a processzor több végrehajtó egységet tartalmaz. Ez lehetővé teszi, hogy egy adott ciklusban több különböző típusú művelet induljon el, például egy aritmetikai művelet és egy memóriahozzáférés egyszerre. Ezt tovább erősíti a többmagos kialakítás, ahol egyetlen chipen több, egymástól független feldolgozó egység található. Ilyenkor a program vagy az operációs rendszer képes a feladatokat szétosztani a magok között.  
+  
+A teljesítmény egyik legnagyobb korlátja nem maga a processzor, hanem a memória elérési ideje. A RAM nagyságrendekkel lassabb, mint a CPU, ezért a processzor gyakran várakozna, ha minden adatot onnan kellene betöltenie. Ennek kezelésére használják a memóriahierarchiát. A cache memória több szinten (L1, L2, L3) helyezkedik el, és a gyakran használt adatokat a processzorhoz közel tárolja. A CPU először mindig a leggyorsabb, legközelebbi cache-ben keres, és csak akkor fordul a lassabb szintek vagy a RAM felé, ha ott nem találja meg az adatot. Ez jelentősen csökkenti az átlagos hozzáférési időt.  
+  
+Az energiahatékonyság szintén kulcsfontosságú szempont, különösen mobil eszközök esetén, de asztali gépeknél is egyre fontosabb. A modern processzorok képesek dinamikusan változtatni az órajelüket és a működési feszültségüket a terhelés függvényében. Alacsony terhelésnél csökkentik a frekvenciát és a fogyasztást, nagy terhelésnél pedig növelik a teljesítményt. Emellett sok rendszerben különböző típusú magok találhatók: erősebb, nagy teljesítményű magok és gyengébb, de energiatakarékos magok. A feladat jellegétől függően a rendszer eldönti, melyiket használja.  
+  
+A modern x86 architektúrák működésében egy további fontos megoldás, hogy a kívülről látható, összetett utasításokat a processzor belsőleg egyszerűbb mikro-utasításokra bontja. Bár az x86 utasításkészlet CISC jellegű, a végrehajtás gyakran egy RISC-szerű belső modellen történik. Ez lehetővé teszi az egyszerűbb, gyorsabb és jobban párhuzamosítható végrehajtást.  
+  
+Összefoglalva, a korszerű processzorok nagy teljesítményét a párhuzamos végrehajtás, a cache-alapú memóriahierarchia és az energiahatékony működés együttes alkalmazása biztosítja.
 
 **Vizsgán fontos kulcsszavak:**  
 **teljesítmény**, **energiahatékonyság**, **[[cache memória]]**, **[[memóriahierarchia]]**, **párhuzamosság**
@@ -288,14 +302,117 @@ Ugyanaz a **ciklus** **[[RISC]]**-en lehet **hosszabb utasításlista**, de **mi
 **Vizsgán fontos kulcsszavak:**  
 **[[RISC]] vs [[CISC]]**, **kompromisszum**, **mikro-utasítás**, **fordító vs hardver**
 
-| Szempont | **[[RISC]]** | **[[CISC]]** |
-|----------|----------------|----------------|
-| Utasítások típusa | Főleg **egyszerű**, kevés alapművelet | **Gazdag**, **komplex** utasítások is |
-| Utasításhossz | Gyakran **fix** | Gyakran **változó** |
-| Tipikus cél | **Pipeline**, gyors **órajel**-hez illeszkedő lépések | **Tömör kód**, **visszafelé kompatibilitás** (főleg **[[x86]]**) |
-| Komplexitás eltolása | Gyakran **fordító** felé | Gyakran **dekódoló / mikroarchitektúra** felé |
-| Vizsgapélda | **[[ARM]]** | **[[x86]]** / Intel, AMD |
+| Szempont             | **[[RISC]]**                                          | **[[CISC]]**                                                     |
+| -------------------- | ----------------------------------------------------- | ---------------------------------------------------------------- |
+| Utasítások típusa    | Főleg **egyszerű**, kevés alapművelet                 | **Gazdag**, **komplex** utasítások is                            |
+| Utasításhossz        | Gyakran **fix**                                       | Gyakran **változó**                                              |
+| Tipikus cél          | **Pipeline**, gyors **órajel**-hez illeszkedő lépések | **Tömör kód**, **visszafelé kompatibilitás** (főleg **[[x86]]**) |
+| Komplexitás eltolása | Gyakran **fordító** felé                              | Gyakran **dekódoló / mikroarchitektúra** felé                    |
+| Vizsgapélda          | **[[ARM]]**                                           | **[[x86]]** / Intel, AMD                                         |
+## RISC és CISC – részletesebb magyarázat
 
+A RISC és a CISC két különböző szemlélet arra, hogyan tervezzünk egy processzort és annak utasításkészletét. A különbség lényege nem csak az utasítások számában vagy bonyolultságában van, hanem abban is, hogy a komplexitás hol jelenik meg: a hardverben vagy a szoftverben.
+
+### RISC működése érthetően
+
+A RISC megközelítés célja, hogy a processzor minél egyszerűbb utasításokat hajtson végre. Ezek az utasítások általában nagyon alap műveletek, például két szám összeadása vagy adat mozgatása. Az utasítások gyakran azonos hosszúságúak, ezért a processzor könnyen és gyorsan tudja őket dekódolni.
+
+A fontos gondolat az, hogy ha egy bonyolult műveletre van szükség, akkor azt nem egyetlen utasítás végzi el, hanem több egyszerű egymás után. Ezt a bontást nem a processzor végzi futás közben, hanem a fordítóprogram már előre elvégzi.
+
+Ez azért előnyös, mert:
+- a processzor egyszerűbb lesz
+- az utasítások kiszámítható ideig futnak
+- nagyon jól működik pipelininggel
+
+Másképp megfogalmazva: a RISC „sok kis, gyors lépésből” dolgozik.
+
+---
+
+### CISC működése érthetően
+
+A CISC ezzel szemben azt mondja: legyenek olyan utasítások, amelyek egyszerre több dolgot is elvégeznek. Például egyetlen utasítás betölthet egy értéket a memóriából, elvégezhet rajta egy műveletet, majd vissza is írhatja.
+
+Ez azt jelenti, hogy:
+- kevesebb utasítás kell egy feladathoz
+- a program rövidebb lehet
+- viszont maga az utasítás végrehajtása bonyolultabb
+
+A probléma az, hogy ezek az utasítások:
+- különböző hosszúságúak lehetnek
+- különböző ideig futnak
+- nehezebb őket pipeline-ba szervezni
+
+Másképp: a CISC „kevesebb, de bonyolultabb lépésből” dolgozik.
+
+---
+
+### A kulcs különbség: hol van a komplexitás?
+
+Ez az egyik legfontosabb vizsgapont.
+
+RISC esetén:
+- a komplexitás a szoftver (fordító) oldalán van
+- a hardver egyszerűbb
+
+CISC esetén:
+- a komplexitás a hardverben van
+- a processzor próbál „okosabb” lenni
+
+---
+
+### Mit jelent az, hogy „kifelé CISC, belül RISC”?
+
+Ez az a rész, ami általában nem egyértelmű.
+
+A modern x86 processzorok (például Intel vagy AMD) hivatalosan CISC architektúrák. Ez azt jelenti, hogy a programozó és a fordító felé egy komplex utasításkészletet mutatnak.
+
+Például van egy olyan utasítás, ami több lépést végez egyszerre.
+
+Viszont a valóságban a processzor ezt nem így hajtja végre.
+
+A működés lépései:
+
+1. A processzor beolvassa a CISC utasítást
+2. A dekóder ezt felbontja több egyszerűbb belső műveletre (ezek a mikro-utasítások vagy micro-ops)
+3. Ezeket a belső, egyszerű műveleteket már egy RISC-szerű motor hajtja végre
+
+Tehát:
+- kívülről: bonyolult utasítások (CISC)
+- belül: sok egyszerű művelet (RISC-szerű feldolgozás)
+
+Ez azért jó, mert:
+- megmarad a kompatibilitás a régi programokkal
+- de a végrehajtás gyors és hatékony marad
+
+---
+
+### Egyszerű analógia
+
+Képzeld el, hogy van egy „komplex parancs”:
+
+„Készíts egy szendvicset”
+
+Ez CISC.
+
+A valóságban viszont a szakács így dolgozik:
+- kenyeret elővesz
+- megkeni
+- sonkát rátesz
+- összecsukja
+
+Ez RISC-szerű lépések sorozata.
+
+---
+
+### Összefoglalás vizsgára
+
+A RISC és CISC közti fő különbség az utasításkészlet felépítésében és a komplexitás elhelyezkedésében van.
+
+A RISC egyszerű, fix hosszúságú utasításokra épít, amelyek gyorsan végrehajthatók és jól pipeline-olhatók, a komplexitást pedig a fordító kezeli.
+
+A CISC gazdagabb, komplexebb utasításkészletet biztosít, amely kevesebb utasítással képes ugyanazt a feladatot elvégezni, viszont a végrehajtás és dekódolás bonyolultabb.
+
+A modern processzorok gyakran ötvözik a kettőt: kívül CISC utasításokat kínálnak, de belül ezeket egyszerűbb, RISC-szerű mikro-utasításokra bontva hajtják végre.
 ### 7.4 Példák
 
 **Rövid definíció:**  
